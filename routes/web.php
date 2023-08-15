@@ -9,6 +9,7 @@ use App\Jobs\BatchJobs;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Bus\Batch;
 use PHPUnit\Event\Code\Throwable;
+use Illuminate\Support\Facades\Cache;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,4 +62,13 @@ Route::get('batchjobs',function(){
     ->dispatch();;
 
     return 'Batch: '. $batch->id . 'is processing';
+});
+
+
+Route::get('cache',function(){
+    if(Cache::get('user')){
+        return Cache::get('user');
+    }
+    Cache::put('user',User::find(1),8);
+    return 'User cached for 8 seconds';
 });
