@@ -11,6 +11,8 @@ use Illuminate\Bus\Batch;
 use PHPUnit\Event\Code\Throwable;
 use Illuminate\Support\Facades\Cache;
 use App\Events\SomeEvent;
+use App\Models\Post;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -100,3 +102,10 @@ Route::get('exceptions2',function(){
     return 'error pass';
 });
 
+Route::get('post_first_gate/{post}/edit',function(Post $post,Request $request){
+    return 'you are editing post first gate';
+})->middleware('can:first-gate-update-post,post');
+
+Route::get('post/{post}/edit',function(Post $post,Request $request){
+    return 'you are editing post second gate';
+})->middleware('can:view,post');
