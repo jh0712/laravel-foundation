@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Bus;
 use Illuminate\Bus\Batch;
 use PHPUnit\Event\Code\Throwable;
 use Illuminate\Support\Facades\Cache;
+use App\Events\SomeEvent;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -72,3 +73,17 @@ Route::get('cache',function(){
     Cache::put('user',User::find(1),8);
     return 'User cached for 8 seconds';
 });
+
+Route::get('dump',function(){
+    $user1 = User::find(1);
+    $user2 = User::find(2);
+    dump($user1);
+    dump($user2);
+    return 'Dump complete';
+});
+
+Route::get('events',function(){
+    event(new SomeEvent(User::find(1)));
+    return 'Event fired.';
+});
+
