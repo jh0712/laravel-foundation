@@ -87,3 +87,16 @@ Route::get('events',function(){
     return 'Event fired.';
 });
 
+Route::get('exceptions',function(){
+    throw new Exception('this is error message');
+});
+Route::get('exceptions2',function(){
+    // this one can not caught by telescope
+    try {
+        throw new Exception('this is error message 2');
+    }catch (Exception $exception){
+        Log::info($exception->getMessage());
+    }
+    return 'error pass';
+});
+
