@@ -7,15 +7,17 @@ use App\Jobs\KiteJobs;
 use App\Mail\SendEmail;
 use App\Models\Post;
 use App\Models\User;
+use App\Notifications\InvoicePaid;
 use Illuminate\Bus\Batch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\Event\Code\Throwable;
-use App\Notifications\InvoicePaid;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -133,8 +135,14 @@ Route::get('sendEmail', function () {
     return 'mail sent';
 });
 
-Route::get('notification',function(){
-   $user = User::find(1);
-   $user->notify(new InvoicePaid());
-   return 'notification sent';
+Route::get('notification', function () {
+    $user = User::find(1);
+    $user->notify(new InvoicePaid());
+    return 'notification sent';
+});
+
+Route::get('setRedis', function () {
+    Redis::set('kitetest_key', 'kitetest_value');
+    $value = Redis::get('kitetest_key');
+    return 'redis is set.';
 });
