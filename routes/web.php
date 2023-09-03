@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\Event\Code\Throwable;
-
+use App\Notifications\InvoicePaid;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -131,4 +131,10 @@ Route::get('sendEmail', function () {
     $data['conetent'] = 'this is content data';
     Mail::to($data['email'])->send(new SendEmail($data));
     return 'mail sent';
+});
+
+Route::get('notification',function(){
+   $user = User::find(1);
+   $user->notify(new InvoicePaid());
+   return 'notification sent';
 });
