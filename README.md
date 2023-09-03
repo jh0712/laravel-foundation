@@ -11,4 +11,12 @@ you can check
 - all you run jobs
 - all you use batch jobs
 - all cache you used 
+- all dump data
+- all event that you use
+- all exceptions
+- all gate
+- all logs
+- all email
+- all redis data
+- all notification
 
