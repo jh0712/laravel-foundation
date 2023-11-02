@@ -1,5 +1,6 @@
 # laravel-foundation
 rewrite file after rebase 
+- first line fix up twices time 
 show the base laravel function in this project
 
 I use telescope to helping me check all function.
